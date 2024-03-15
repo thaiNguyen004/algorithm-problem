@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Signup</title>
+    <!--Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col md-3"></div>
+        <div class="col md-6 bg-dark text-light text-center rounded-top p-3">
+            <h5 class="mb-1">Signup</h5>
+        </div>
+        <div class="col md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col md-3"></div>
+        <div class="col md-6 rounded-bottom border border-dark p-3">
+            <div th:if="${param.success}">
+                <div class="alert alert-success">
+                    Registration completed. You can now <a href="/login" th:href="@{/login}">login</a>
+                </div>
+            </div>
+            <form th:action="@{/signup}" th:object="${user}" method="post">
+                <div class="form-group">
+                    <label for="inputFirstName">First name</label>
+                    <input class="form-control" type="text" id="inputFirstName" th:field="*{firstName}" placeholder="Enter first name" autofocus>
+                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="inputLastName">Last name</label>
+                    <input class="form-control" type="text" id="inputLastName" th:field="*{lastName}" placeholder="Enter last name">
+                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input class="form-control" type="email" id="inputEmail" th:field="*{email}" placeholder="Enter email">
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input class="form-control" type="text" id="inputUsername" th:field="*{username}" placeholder="Enter username">
+                    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input class="form-control" type="password" id="inputPassword" th:field="*{password}" placeholder="Enter password">
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="inputPasswordConfirm">Confirm password</label>
+                    <input class="form-control" type="password" id="inputPasswordConfirm" th:field="*{passwordConfirm}" placeholder="Enter password again">
+                    <span th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}" class="text-danger"></span>
+                </div>
+                <div class="form-group text-center mt-1">
+                    <input type="submit" class="btn btn-dark" value="Sign up">
+                    <p>Already have an account? <a href="/login">Sign in</a></p>
+                </div>
+            </form>
+        </div>
+        <div class="col md-3"></div>
+    </div>
+</div>
+</body>
+</html>
